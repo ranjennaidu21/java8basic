@@ -17,6 +17,17 @@ public class ConsumerExample {
 
         List<Student> studentList = StudentDataBase.getAllStudents();
         studentList.forEach(c2); //it accepting Consumer Implementation, so we create one above
+
+        printNameAndActivities();
+
+    }
+
+    public static void printNameAndActivities(){
+        List<Student> studentList = StudentDataBase.getAllStudents();
+        Consumer<Student> c3 = (student) -> System.out.print(student.getName());
+        Consumer<Student> c4 = (student) -> System.out.println(student.getActivities());
+
+        studentList.forEach(c3.andThen(c4)); //use andThen to run another consumer Implementation - called Consumer Chaining
     }
 
 }
