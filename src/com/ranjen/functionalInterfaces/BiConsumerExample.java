@@ -1,8 +1,24 @@
 package com.ranjen.functionalInterfaces;
 
+import com.ranjen.data.Student;
+import com.ranjen.data.StudentDataBase;
+
+import java.util.List;
 import java.util.function.BiConsumer;
 
 public class BiConsumerExample {
+
+    public static void nameAndActivities(){
+        List<Student> studentList = StudentDataBase.getAllStudents();
+
+        BiConsumer<String,List<String>> biConsumerStudent = (a,b)->{
+            System.out.println("Name: "+a + " Activites: " +b);
+        };
+
+        studentList.forEach((student)->{
+            biConsumerStudent.accept(student.getName(),student.getActivities());
+        });
+    }
 
     public static void main(String[] args) {
 
@@ -23,6 +39,8 @@ public class BiConsumerExample {
         };
 
         multiply.andThen(division).accept(10,5);
+
+        nameAndActivities();
 
     }
 
