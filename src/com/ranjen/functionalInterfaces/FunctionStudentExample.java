@@ -15,7 +15,10 @@ public class FunctionStudentExample {
     static Function<List<Student>, Map<String,Double>> function = (students)->{
         Map<String,Double> studentMap = new HashMap<>();
         students.forEach((student)->{
-            studentMap.put(student.getName(),student.getGpa());
+            //if let say want to use predicate where grade is more than 3
+            if(PredicateStudentExample.p1.test(student)){
+                studentMap.put(student.getName(),student.getGpa());
+            }
         });
         return studentMap; //this should return map
 
