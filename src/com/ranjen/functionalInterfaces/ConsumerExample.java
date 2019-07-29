@@ -19,12 +19,25 @@ public class ConsumerExample {
         studentList.forEach(c2); //it accepting Consumer Implementation, so we create one above
 
         printNameAndActivities();
-
+        printNameAndActivitiesWithCOnditions();
     }
 
     public static void printNameAndActivities(){
+        System.out.println();
+        System.out.println("printNameAndActivities()");
         List<Student> studentList = StudentDataBase.getAllStudents();
         studentList.forEach(c3.andThen(c4)); //use andThen to run another consumer Implementation - called Consumer Chaining
+    }
+
+    public static void printNameAndActivitiesWithCOnditions(){
+        System.out.println();
+        System.out.println("printNameAndActivitiesWithCOnditions()");
+        List<Student> studentList = StudentDataBase.getAllStudents();
+        studentList.forEach((student)->{
+            if(student.getGradeLevel()>=3 && student.getGpa()>=3.9){ //filter
+                c3.andThen(c4).accept(student);
+            }
+        });
     }
 
 }
