@@ -2,8 +2,14 @@ package com.ranjen.data;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.Supplier;
 
 public class StudentDataBase {
+
+    //to get single Student object
+    public static Supplier<Student> studentSupplier = ()->{
+        return new Student("Jenny",2,3.8,"female", Arrays.asList("swimming", "gymnastics","soccer"));
+    };
 
     /**
      * Total of 6 students in the database.
