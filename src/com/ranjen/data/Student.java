@@ -60,6 +60,12 @@ public class Student {
         this.activities = activities;
     }
 
+
+    public void printListOfActivities(){
+
+        System.out.println("List of Activities are : " + this.activities);
+    }
+
     @Override
     public String toString() {
         return "Student{" +
