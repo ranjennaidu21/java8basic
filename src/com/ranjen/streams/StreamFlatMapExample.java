@@ -3,6 +3,7 @@ package com.ranjen.streams;
 import com.ranjen.data.Student;
 import com.ranjen.data.StudentDataBase;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -47,6 +48,7 @@ public class StreamFlatMapExample {
                 .flatMap(List::stream) //need to flat the stream as above it is still Stream<List<String>>, need to be Stream<String>
                 .distinct() // now it will ignore all the repetitive elements
                 .sorted()
+                //.sorted(Comparator.reverseOrder()) //for reverse order
                 .collect(Collectors.toList()); //once it is one element Stream<String> the only able to pass to collect
         return studentActivitiesList;
     }
