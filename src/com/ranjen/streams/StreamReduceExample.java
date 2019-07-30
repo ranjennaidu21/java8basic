@@ -1,5 +1,8 @@
 package com.ranjen.streams;
 
+import com.ranjen.data.Student;
+import com.ranjen.data.StudentDataBase;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -36,6 +39,13 @@ public class StreamReduceExample {
         //15*7=105
     }
 
+
+    //reduce to student who have highest gpa in this whole Student collection
+    public static Optional<Student> getHighestGpaStudent(List<Student> studentList){
+        return studentList.stream()
+                .reduce((s1,s2)-> s1.getGpa()>s2.getGpa()? s1:s2); //if s1>s2 return s1 else return s2
+    }
+
     public static void main(String[] args) {
         System.out.println("Perform Multiplication with InitialValue");
         List<Integer> myIntegerList = Arrays.asList(1,3,5,7);
@@ -47,6 +57,12 @@ public class StreamReduceExample {
         if(myIntegerListWithoutIdentity.isPresent()){
             System.out.println(myIntegerListWithoutIdentity.isPresent());
             System.out.println(myIntegerListWithoutIdentity.get());
+        }
+
+        System.out.println("Get Highest GPA Student");
+        Optional<Student> optionalStudent = getHighestGpaStudent(StudentDataBase.getAllStudents());
+        if(optionalStudent.isPresent()){
+            System.out.println(optionalStudent.get());
         }
     }
 
