@@ -32,9 +32,13 @@ public class StreamsExample {
         Predicate<Student> studentGradePredicate = (student -> student.getGradeLevel()>=3);
         Predicate<Student> studentGpaPredicate = (student -> student.getGpa()>=3.9);
 
+        //we use peek to debug what is the value passed from one filter to another , can remove later if not needed
         Map<String, List<String>> studentMap3 = StudentDataBase.getAllStudents().stream()
+                .peek((student -> System.out.println("NO FILTER: "+student)))//6 records
                 .filter(studentGradePredicate)
+                .peek((student -> System.out.println("Result of firstFilter: "+student))) //4 records
                 .filter(studentGpaPredicate)
+                .peek((student -> System.out.println("Result of secondFilter: "+student))) //3 records
                 .collect(Collectors.toMap(Student::getName,Student::getActivities));
 
         System.out.println("Result is" +studentMap3);
