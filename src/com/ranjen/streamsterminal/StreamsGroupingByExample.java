@@ -3,11 +3,12 @@ package com.ranjen.streamsterminal;
 import com.ranjen.data.Student;
 import com.ranjen.data.StudentDataBase;
 
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
-import static java.util.stream.Collectors.groupingBy;
-import static java.util.stream.Collectors.summingInt;
+import static java.util.stream.Collectors.*;
 
 public class StreamsGroupingByExample {
     //group the element based on a property
@@ -60,12 +61,26 @@ public class StreamsGroupingByExample {
         System.out.println(studentMap);
     }
 
+    //Type 3 - first is the key, second is what kind of collection it going to return (LinkedHashMap) , third is what is the value
+    //of the output that is going to generate
+    public static void threeArgumentGroupBy(){
+        LinkedHashMap<String,Set<Student>> studentLinkedHashMap =
+                StudentDataBase.getAllStudents()
+                        .stream()
+                        .collect(groupingBy(Student::getName, //key
+                                LinkedHashMap::new, //output collection
+                                toSet())); //value of the output
+        System.out.println(studentLinkedHashMap);
+    }
+
+
     public static void main(String[] args) {
         groupStudentsByGender();
         customizedGrouping();
         twoLevelGrouping_1();
         twoLevelGrouping_2();
         twoLevelGrouping_3();
+        threeArgumentGroupBy();
     }
 
 }
