@@ -21,7 +21,8 @@ public class OptionalExample {
     }
 
     public static Optional<String> getStudentNameOptional(){
-        Optional<Student> studentOptional = Optional.of(StudentDataBase.studentSupplier.get()); //.of take Student object and wrap into optional object
+        //Optional<Student> studentOptional = Optional.of(StudentDataBase.studentSupplier.get()); //.of take Student object and wrap into optional object
+        Optional<Student> studentOptional = Optional.ofNullable(null); //this going to return Optional.empty();
         if(studentOptional.isPresent()){
             return studentOptional.map(Student::getName); //Stream<String>
         }
@@ -42,6 +43,10 @@ public class OptionalExample {
 
         //for Optional we dont have to check the null
         Optional<String> optionalName = getStudentNameOptional();
+
+        //the difference is that you still can execute method in the empty optional Object
+        //even optionalName return empty but still we can check the value inside it is present or not
+        //above null not belong to any type but for this method always return Optional type
         if(optionalName.isPresent()){
             System.out.println("Length of the student name: "+optionalName.get().length());
         }else{
