@@ -2,13 +2,17 @@ package com.ranjen.data;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.function.Supplier;
 
 public class StudentDataBase {
 
     //to get single Student object
     public static Supplier<Student> studentSupplier = ()->{
-        return new Student("Jenny",2,3.8,"female", Arrays.asList("swimming", "gymnastics","soccer"));
+        Bike bike = new Bike("Client123", "Client456");
+        Student student = new Student("Jenny",2,3.8,"female", Arrays.asList("swimming", "gymnastics","soccer"));
+        student.setBike(Optional.of(bike));
+        return student;
     };
 
     /**
