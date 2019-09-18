@@ -3,10 +3,7 @@ package com.ranjen.streamsterminal;
 import com.ranjen.data.Student;
 import com.ranjen.data.StudentDataBase;
 
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 import static java.util.stream.Collectors.*;
 
@@ -73,6 +70,29 @@ public class StreamsGroupingByExample {
         System.out.println(studentLinkedHashMap);
     }
 
+    //maxBy with groupingBY
+    //get top score of Student for each GradeLevel
+    public static void calculateTopGpa(){
+        Map<Integer,Optional<Student>> studentMap =
+                StudentDataBase.getAllStudents()
+                        .stream()
+                        .collect(groupingBy(Student::getGradeLevel, //key
+                                maxBy(Comparator.comparing(Student::getGpa)))); //return Optional<Student>
+        System.out.println(studentMap);
+    }
+
+    //minBy with groupingBy , also using collectingThen which will get the object itself instead of Optional as above in
+    //get least score of Student for each GradeLevel
+    public static void calculateMinGpa(){
+        Map<Integer,Student> studentMap =
+                StudentDataBase.getAllStudents()
+                        .stream()
+                        .collect(groupingBy(Student::getGradeLevel, //key
+                                collectingAndThen(minBy(Comparator.comparing(Student::getGpa)),
+                                        Optional::get))); //this collectingAndThen get the Student, if available assign as value
+        System.out.println(studentMap);
+    }
+
 
     public static void main(String[] args) {
         groupStudentsByGender();
@@ -81,6 +101,8 @@ public class StreamsGroupingByExample {
         twoLevelGrouping_2();
         twoLevelGrouping_3();
         threeArgumentGroupBy();
+        calculateTopGpa();
+        calculateMinGpa();
     }
 
 }
