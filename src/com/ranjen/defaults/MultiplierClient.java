@@ -6,6 +6,10 @@ import java.util.List;
 public class MultiplierClient {
 
     public static void main(String[] args) {
+        //AbstracClasses vs Interfaces
+        //instance variable not allowed in interfaces , a class can extend one class but can implement multiple interfaces
+
+
         Multiplier multiplier = new MultiplierImpl();
         List<Integer> inputList = Arrays.asList(1,3,5);
         System.out.println("Result is : " + multiplier.multiply(inputList));
