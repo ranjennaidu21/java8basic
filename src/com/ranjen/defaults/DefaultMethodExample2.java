@@ -33,6 +33,18 @@ public class DefaultMethodExample2 {
         studentList.forEach(studentConsumer);
     }
 
+    public static void sortWithNullValues(List<Student> studentList){
+        Comparator<Student> nameComparator = Comparator.comparing(Student::getName);
+        studentList.sort(Comparator.nullsFirst(nameComparator));
+        studentList.forEach(studentConsumer);
+    }
+
+    public static void sortWithNullValuesLast(List<Student> studentList){
+        Comparator<Student> nameComparator = Comparator.comparing(Student::getName);
+        studentList.sort(Comparator.nullsLast(nameComparator));
+        studentList.forEach(studentConsumer);
+    }
+
     public static void main(String[] args) {
         System.out.println("Before Sort: ");
         List<Student> studentList = StudentDataBase.getAllStudents();
@@ -46,6 +58,14 @@ public class DefaultMethodExample2 {
 
         System.out.println("Using ComparatorChaining by Grade Level then Name: ");
         comparatorChaining(studentList);
+
+        //If let say the list have null values
+        List<Student> studentListWithNullValues = StudentDataBase.getAllStudentsWithNullValues();
+        System.out.println("Sort by Name for List with Null Values , put null in first: ");
+        sortWithNullValues(studentListWithNullValues);
+        System.out.println("Sort by Name for List with Null Values , put null in last: ");
+        sortWithNullValuesLast(studentListWithNullValues);
+
     }
 
 }
